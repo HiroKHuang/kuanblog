@@ -1,0 +1,24 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-01-31 10:13:34
+ * @LastEditTime : 2020-02-01 11:57:52
+ * @LastEditors  : Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \11.宽的博客\kuanblog\templates\blog\index.html
+ -->
+{% extends 'base.html' %}
+{% from 'bootstrap/pagination.html' import render_pagination %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-9 col-sm-8">
+        {% include "blog/_articles.html" %}
+    </div>
+    {% if categories %}
+    <div class="col-lg-3 col-sm-4">
+        {% include "blog/_sidebar.html" %}
+    </div>
+    {% endif %}
+</div>
+{{ render_pagination(pagination) }}
+{% endblock content %}

@@ -1,0 +1,38 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-01-31 17:09:30
+ * @LastEditTime : 2020-02-01 12:05:51
+ * @LastEditors  : Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \10.宽的博客\kuanblog\templates\blog\_articles.html
+ -->
+{% if category %}
+<div class="page-header">
+    <h1>Category: {{ category.name }}</h1>
+    <p class="text-muted">{{ category.articles|length }} articles</p>
+</div>
+{% endif %}
+{% if articles %}
+{% for article in articles %}
+    <h3 class="text-primary"><a href="{{ url_for('blog.show_article', article_id=article.id) }}", article_id=article.id>{{ article.title }}</a></h3>
+    <p>
+        {{ article.body|striptags|truncate }}
+        <small><a href="{{ url_for('blog.show_article', article_id=article.id) }}">Read More</a></small>
+    </p>
+    <small>
+        Comments: <a>{{ article.comments|length }}</a>&nbsp;&nbsp;
+
+        Category: <a href="{{ url_for('blog.show_category', category_id=article.category.id) }}">{{ article.category.name }}</a>
+        <span class="float-right">{{ article.timestamp }}</span>
+
+
+    </small>
+    {% if not loop.last %}
+        <hr>
+    {% endif %}
+{% endfor %}
+{% else %}
+<div class="tip">
+<h5>No Articles yet</h5>
+</div>
+{% endif %}

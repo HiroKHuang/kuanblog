@@ -1,0 +1,25 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-01-31 10:13:34
+ * @LastEditTime : 2020-01-31 17:11:12
+ * @LastEditors  : Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \11.宽的博客\kuanblog\templates\blog\index.html
+ -->
+ {% extends 'base.html' %}
+
+ {% block content %}
+ <div class="row">
+     <div class="col-lg-9 col-sm-8">
+        {% include "blog/_articles.html" %}
+     </div>
+     {% if categories %}
+     <div class="col-lg-3 col-sm-4">
+         <!-- 侧面栏 -->
+         {% include "blog/_sidebar.html" %}
+     </div>
+     {% endif %}
+ </div>
+ {% endblock content %}
+
+ 

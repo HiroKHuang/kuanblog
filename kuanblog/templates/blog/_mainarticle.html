@@ -1,0 +1,14 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-02-01 15:58:03
+ * @LastEditTime : 2020-02-01 16:02:47
+ * @LastEditors  : Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \10.宽的博客\kuanblog\templates\blog\_mainarticle.html
+ -->
+
+{% block mycss %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/markdown.css') }}">
+{% endblock %}
+
+{{ article.body | safe }}

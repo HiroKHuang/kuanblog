@@ -1,0 +1,21 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-02-01 08:21:10
+ * @LastEditTime : 2020-02-01 11:31:12
+ * @LastEditors  : Please set LastEditors
+ * @Description: In User Settings Edit%
+ * @FilePath: \10.宽的博客\kuanblog\templates\admin\new_article.html
+ -->
+{% extends 'base.html' %}
+{% from 'bootstrap/form.html' import render_form %}
+
+{% block content %}
+<div class="page-header">
+    <h1>修改文章</h1>
+</div>
+{{ render_form(form) }}
+{% endblock content %}
+
+{% block scripts %}
+    <script type="text/javascript" src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
+{% endblock scripts %}

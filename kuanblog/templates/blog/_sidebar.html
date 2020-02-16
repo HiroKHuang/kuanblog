@@ -1,0 +1,23 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-01-31 15:23:03
+ * @LastEditTime : 2020-02-01 12:03:17
+ * @LastEditors  : Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \10.宽的博客\kuanblog\templates\blog\_sidebar.html
+ -->
+<div class="card">
+    <div class="card-header">
+        <div class="text-center">文章类别</div>
+    </div>
+    <ul class="list-group">
+        {% for category in categories %}
+        <li class="list-group-item">
+
+            <a href="{{ url_for('blog.show_category', category_id=category.id) }}">{{ category.name }}</a>
+
+            <span class="badge badge-pill badge-secondary float-right">{{ category.articles|length }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+</div>

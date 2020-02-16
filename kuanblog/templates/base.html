@@ -1,0 +1,107 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-01-30 22:06:41
+ * @LastEditTime : 2020-02-01 15:51:10
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \00.博客练习\blog.html
+ -->
+{% from 'bootstrap/nav.html' import render_nav_item %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Audit Bucket</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    {% block mycss %}
+    {% endblock %}
+</head>
+<style>
+</style>
+<body>
+    <!-- 导航栏 -->
+    <!-- navbar：导航条；navbar-expand-sm：设置屏幕堆叠； bg-light：背景色； navbar-light：字体色；fixed-top：置顶 -->
+    <nav class="navbar navbar-expand-sm bg-light navbar-light fixed-top">
+        <!-- container：修正导航宽度； justify-content-start：设置元素排版 -->
+        <div class="container justify-content-start">
+            <!-- 建立到首页的链接 -->
+            <a href="{{ url_for('blog.index' )}}" class="navbar-brand"><img src="{{ url_for('static', filename='images/auditbucketicon.png') }}" height="30">  Home</a>
+            <button class="navbar-toggler ml-auto" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <!-- <li class="nav-item active">
+                        <a class="nav-link" href="#">Excel</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('blog.about') }}">About Me</a>
+                    </li> -->
+                    {{ render_nav_item('blog.about', 'About me')}}
+                    <!-- 使用bootstrap模板渲染导航 -->
+                    <!-- {{ render_nav_item('blog.index', 'Home') }} -->
+                </ul>                  
+                <div class="navbar-nav ml-auto">
+                    {% if current_user.is_authenticated %}
+                    <div class="dropdown">
+                        <button type="button" class="btn dropdown-toggle" role="button" data-toggle="dropdown" data-target>新增<span class="caret"></span></button>
+                        <div class="dropdown-menu">
+                            <a href="{{ url_for('admin.new_article') }}" class="dropdown-item">新增文章</a>
+                            <a href="{{ url_for('admin.new_category') }}" class='dropdown-item'>新增类别</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button type="button" class="btn dropdown-toggle" role="button" data-toggle="dropdown" data-target>管理<span class="caret"></span></button>
+                        <div class="dropdown-menu">
+                            <a href="{{ url_for('admin.manage_article') }}" class="dropdown-item">文章管理</a>
+                            <a href="{{ url_for('admin.manage_category') }}" class='dropdown-item'>类别管理</a>
+                        </div>
+                    </div>
+
+                    <a class="nav-link" href="{{ url_for('admin.logout', next=request.full_path) }}">登出</a>
+                    {% else %}
+                    <!-- <a class="nav-link" href="{{ url_for('admin.login', next=request.full_path) }}">登录</a> -->
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- 导航栏 -->
+    <!-- 巨幕 -->
+    {% block jumbotron %}
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Audit Bucket <small></small></h1>
+            
+            <p class="lead">这里只有干货!!!</p>
+
+        </div>
+    </div>
+    {% endblock jumbotron %}
+    <!-- 巨幕 -->
+
+    <main class="container">
+
+        <!-- 消息部分 -->
+        {% for message in get_flashed_messages(with_categories=True) %}
+        <div class="alert alert-{{ message[0] }}">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ message[1] }}
+        </div>
+        {% endfor %}
+        <!-- 内容区域 -->
+        {% block content %}{% endblock content %}
+    </main>
+
+</body>
+<script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+{% block scripts %}
+{% endblock scripts %}
+</html>

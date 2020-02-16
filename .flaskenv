@@ -1,0 +1,2 @@
+FLASK_APP=kuanblog
+FLASK_DEBUG=1

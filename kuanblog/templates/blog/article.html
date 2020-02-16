@@ -1,0 +1,49 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-01-31 17:12:39
+ * @LastEditTime : 2020-02-01 16:01:23
+ * @LastEditors  : Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \10.宽的博客\kuanblog\templates\blog\article.html
+ -->
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-9 col-sm-8">
+        <div class="page-header">
+            <h1>{{ article.title }}</h1>
+            <small>
+
+                Category: <a href="{{ url_for('blog.show_category', category_id=article.category.id) }}">{{ article.category.name }}</a><br>
+
+                Date: {{ article.timestamp }}
+            </small>
+            <div>{% include 'blog/_mainarticle.html' %}</div>
+        </div>
+         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#shareTab">分享</button>
+        <div class="modal fade" id="shareTab">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">文章地址</h4>
+                        <button class="close" data-dismiss="modal">%times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" class="form-control" value="{{ url_for('.show_article', article_id=article.id, _external=True) }}" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if categories %}
+    <div class="col-lg-3 col-sm-4">
+        <!-- 侧面栏 -->
+        {% include "blog/_sidebar.html" %}
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}

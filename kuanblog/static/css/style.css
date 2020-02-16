@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: "gudian";
+  src: url("../font/gudian.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+    font-family: "gudian";
+}
+
+body{
+    padding-top: 55px;
+}
+
+
+div.loginform{
+    padding-top: 50px;
+}
+

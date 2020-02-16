@@ -1,0 +1,50 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-02-01 00:37:32
+ * @LastEditTime : 2020-02-01 12:14:20
+ * @LastEditors  : Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \10.宽的博客\kuanblog\templates\admin\manage_article.html
+ -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Articles:
+        <small class="text-muted">{{ pagination.total }}</small>
+        <span><a class="btn btn-secondary btn-sm float-right" href="{{ url_for('admin.new_article') }}">新增</a></span>
+    </h1>
+</div>
+{% if articles %}
+<table class="table table-striped">
+    <thead>
+        <tr class="text-center">
+            <th>序号</th>
+            <th>文章名称</th>
+            <th>文章类别</th>
+            <th>日期</th>
+            <th>字数</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for article in articles %}
+        <tr>
+            <td>{{ loop.index + ((pagination.page - 1) * config.KUANBLOG_MANAGE_PER_PAGE) }}</td>
+            <td><a href="{{ url_for('blog.show_article', article_id=article.id) }}">{{ article.title }}</a></td>
+            <td><a href="{{ url_for('blog.show_category', category_id=article.category.id ) }}">{{ article.category.name }}</a></td>
+            <td>{{ article.timestamp }}</td>
+            <td>{{ article.body|striptags|length }}</td>
+            <td class="d-flex justify-content-center">
+                <a href="{{ url_for('admin.edit_article', article_id=article.id) }}" class="btn btn-info btn-sm">编辑</a>
+                <form action="{{ url_for('admin.delete_article', article_id=article.id) }}" next=request.full_path>
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('确定删除吗？');">删除</button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}

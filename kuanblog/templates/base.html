@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-30 22:06:41
- * @LastEditTime : 2020-02-01 15:51:10
+ * @LastEditTime: 2020-03-10 23:59:12
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \00.博客练习\blog.html
@@ -97,8 +97,11 @@
         {% endfor %}
         <!-- 内容区域 -->
         {% block content %}{% endblock content %}
+        <footer>
+            <small>AuditBucket©2020 | 黄宽慎的官方网站 | 备案号：<a href="http://beian.miit.gov.cn/" target="_blank">闽ICP备20002019号</a></small>
+        </footer>
     </main>
-
+    
 </body>
 <script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
